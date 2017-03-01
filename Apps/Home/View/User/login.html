@@ -1,0 +1,33 @@
+<style>
+.form-container{
+	margin-top:5rem;
+	margin-bottome:5rem;
+}
+</style>
+
+<div class="container form-container">
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="javascript:void(0);">登录</a></li>
+		<li><a href="<{:U('Home/Index/join')}>">注册</a></li>
+	</ul>
+	<form method="post" action="<{:U('Home/Index/login')}>" id="loginForm">
+	<div class="form-group">
+		<label for="inputEmail">邮箱</label>
+		
+		<input type="text" name="email" class="form-control" id="inputEmail" placeholder="Email">
+		
+	</div>
+	<div class="form-group">
+		<label for="inputPassword">密码</label>
+		<input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password">
+	</div>
+	<div class="form-group">
+		<button type="button" class="btn btn-primary" onclick="javascript:formsubmit('#loginForm')">登录</button>
+	</div>
+	<div class="form-group">
+	<label>用其他账号登录</label>
+		<div class="controls"><a href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=100485793&redirect_uri=<php>echo urlencode(C('HOST_URL').U('Home/Index/qqLogin'));</php>"><img src="./Public/icon/qq_connect_logo_7.png" /></a></div>
+	</div>
+</form>
+</div>
+

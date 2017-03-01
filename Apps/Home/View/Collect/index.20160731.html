@@ -1,0 +1,94 @@
+<include file="Tpl/Common/header.html" />
+<div class="masthead">
+	<div class="row-fluid">
+		<include file="Tpl/Common/usermenu.html" />
+	</div>
+</div>
+<div class="navbar navbar-inverse">
+	<div class="navbar-inner">
+		<div class="container">
+			<!-- Be sure to leave the brand out there if you want it shown -->
+			<ul class="nav ">
+				<li class="active"><a href="#">我的网址</a></li>
+				<li><a href="{:U('Home/Collect/edit')}">添加网址</a></li>
+			</ul>
+
+		</div>
+	</div>
+</div>
+<br />
+<div class="row-fluid">
+<volist name="collects" id="collect">
+	<div class="coll" id="rmcate_{$collect.cateid}">
+		<ul class="nav nav-tabs">
+			<li class="active" style="width:150px;">
+				<if condition="$isMangeMode eq '1'">
+				<font class="edit-cate-btn">
+					<a href="javascript:void(0)" onclick="show_editcate_form('{$collect.cateid}','{$collect.catename}')" class="oprate"><i class="icon-edit"></i></a>
+					<if condition="$collect.isdefault NEQ '1'"><a href="javascript:void(0)" rmElement="rmcate_{$collect.cateid}" ctype="drop" acturl="{:U('Home/Cate/delete',array('id'=>$collect['cateid']))}" class="oprate"><i class="icon-remove"></i></a></if>
+				</font>
+				</if>				
+				<a class="text-center">{$collect.catename}</a>
+			</li>
+			
+		</ul>
+		<notempty name="collect[data]">
+		<div class="well well-large" style="margin-top: -10px;">
+		<ul class="inline collect-list">
+			<volist name="collect[data]" id="col">
+				<li class="urls" id="rm_{$col.id}">
+				<if condition="$isMangeMode eq '1'">
+					<a href="{:U('Home/Collect/edit',array('id'=>$col['id']))}" class="oprate"><i class="icon-edit"></i></a>&nbsp; 
+					<a href="javascript:void(0)" rmElement="rm_{$col.id}" ctype="drop" acturl="{:U('Home/Collect/delete',array('id'=>$col['id']))}" class="oprate"><i class="icon-remove"></i></a>					
+					<br />
+					<a href="{$col.value}" target="_blank" >{:mbsubstr($col['name'],6)}</a>
+				<else />
+					<a class="tips" href="{$col.value}" data-toggle="tooltip" title="{$col.name}" target="_blank">{:mbsubstr($col['name'],6)}</a>
+				</if>
+					
+				</li>		
+			</volist>
+		</ul>		
+		</div>
+		
+		<else />
+		<div class="well well-large" style="margin-top: -10px;">
+		<p class="muted">该类别下暂无连接</p>
+		</div>
+		
+		</notempty>
+	<hr />
+	</div>
+</volist>
+</div>
+<import file="Js.bootstrap-js.bootstrap-tooltip"/>
+<script>
+$(function() {
+		jQuery('li').hover(function(){
+			$(this).find(".oprate").show();
+		},function(){
+			$(this).find(".oprate").hide();
+		})
+});
+
+function show_editcate_form(id){
+	var htmlobj=$.ajax({
+		url:"{:U('Home/Cate/edit')}"+"&id="+id,
+		async:false
+		});
+	var content = htmlobj.responseText ;
+	jQuery.dialog({
+		title : '修改',
+		content : content
+	});
+}
+jQuery('.tips').hover(function(){
+	$(this).tooltip('show');
+},function(){
+	$(this).tooltip('hide');
+})
+
+
+</script>
+
+<include file="Tpl/Common/footer.html" />

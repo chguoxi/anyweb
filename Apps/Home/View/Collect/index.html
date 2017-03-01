@@ -1,0 +1,66 @@
+<div class="container">
+	
+
+	<volist name="collects" id="collect">
+    <div class="cate-section">
+	<div class="catelist">
+	        <h1 class="page-header">
+	            <a class="catename"><{$collect.catename}></a>
+	            <!-- 
+		        <a  href="<{:U('Home/Collect/edit')}>" >
+		        	<span class="glyphicon glyphicon-plus"></span>
+		        </a>	            
+	             -->
+	            
+	        </h1>
+	</div>	
+	<empty name="collect.data">
+		<div class="row">
+			<p class="text-warning">该类别下暂无连接</p>
+		</div>
+	</empty>
+	<notempty name="collect.data">
+		<div class="row">
+		<volist name="collect.data" id="col" key="ckey">
+	        <div class="col-md-2 col-sm-3 col-xs-6 portfolio-item">
+				
+					<div class="img-holder">
+						<h3><a href="<{$col.value}>" target="_blank"><{:mb_substr($col['name'],0,15,"utf-8")}></a></h3>
+					</div>					
+				
+	        </div>
+		</volist>
+		</div>
+	</notempty>
+	</div>
+	</volist>
+
+</div>
+<script>
+$(function() {
+		jQuery('li').hover(function(){
+			$(this).find(".oprate").show();
+		},function(){
+			$(this).find(".oprate").hide();
+		})
+});
+
+function show_editcate_form(id){
+	var htmlobj=$.ajax({
+		url:"{:U('Home/Cate/edit')}"+"&id="+id,
+		async:false
+		});
+	var content = htmlobj.responseText ;
+	jQuery.dialog({
+		title : '修改',
+		content : content
+	});
+}
+jQuery('.tips').hover(function(){
+	$(this).tooltip('show');
+},function(){
+	$(this).tooltip('hide');
+})
+
+
+</script>

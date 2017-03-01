@@ -1,0 +1,57 @@
+<!-- add collect -->
+<div class="container">
+<div class="modal fade" id="editcollect" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">编辑连接</h4>
+      </div>
+      <div class="modal-body">
+        <form action="<{:U('Home/Collect/edit',array('id'=>$data['id']))}>" id="saveCollect">
+		<div class="control-group">
+			<label class="control-label" for="inputEmail">分类<button type="button" class="btn btn-default" data-toggle="modal" data-target="#editcate" id="dg"><i class="glyphicon glyphicon-plus"></i></button></label>
+			<div class="controls">
+				<select name="cateid" class="form-control">
+					<volist name="cates" id="cate">
+						<option value="<{$cate.cateid}>" <eq name="data.cateid" value="$cate['cateid']">selected="selected"</eq> /><{$cate.catename}></option>
+					</volist>
+				</select>
+				
+			</div>
+		</div>
+          <div class="form-group">
+            <label for="inputName" class="control-label">标识名</label>
+            <input type="text" class="form-control" name="name" value="<{$data.name}>" id="inputName" placeholder="自定义一个标识名" >
+          </div>
+          <div class="form-group">
+            <label for="inputPassword" class="control-label">网址:</label>
+            <input type="text" class="form-control" name="value" value="<{$data.value}>" id="inputPassword" placeholder="填写您需要收藏的网址">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" onclick="javascript:formsubmit('#saveCollect')">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="eidtcate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+	<div class="modal-dialog" role="document">
+	   <div class="modal-content">
+	     <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">编辑连接</h4>	     
+	     </div>
+	   </div>
+	</div>
+	<div class="modal-body">
+	<form action="{:U('Home/Cate/edit')}" class="form-inline" method="post" id="addForm">
+		<label>类别名称:</label>
+		<input type="text" name="catename" value="" placeholder="类别名称" id="catename" />
+		<button type="button" class="btn" id="save" onclick="javascript:formsubmit('#addForm')">添加</button>
+	</form>
+	</div>
+</div>
+</div>

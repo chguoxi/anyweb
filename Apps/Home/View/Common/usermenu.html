@@ -1,0 +1,10 @@
+<div class="span9"><h3 class="muted">{$project}</h3></div>
+<div class="span3">
+欢迎你!{$username} 
+<a class="btn btn-mini" ctype="ajaxmod" acturl="{:U('Home/Index/manageMode')}" href="javascript:void(0)">
+<if condition="$isMangeMode eq '1'">浏览模式
+<else />
+管理模式
+</if>
+</a>  
+<a ctype="ajaxmod" acturl="{:U('Home/Index/logout')}" href="javascript:void(0)" class="btn btn-mini">退出</a></div>

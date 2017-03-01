@@ -1,0 +1,6 @@
+<form action="{:U('Home/Cate/edit')}" class="form-inline" method="post" id="addForm">
+	<label>类别名称:</label>
+	<input type="text" name="catename" value="{$data.catename}" placeholder="类别名称"/>
+	<input type="hidden" name="id" value="{$data.cateid}" />
+	<button type="button" class="btn" id="save" onclick="javascript:formsubmit('#addForm')">添加</button>
+</form>
